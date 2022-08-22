@@ -1,0 +1,42 @@
+@import url('./reset.css');
+@import url('./carrossel.css');
+
+.search {
+  padding: 20px;
+  position: relative;
+}
+
+.search input {
+  width: 90%;
+  border: 1px solid black;
+  border-radius: 5px;
+  font-size: x-large;
+}
+
+.card {
+  width: 25%;
+}
+
+.card h1 {
+  text-align: center;
+  font-size: xx-large;
+}
+
+.card h2 {
+  text-align: center;
+  font-size: large;
+}
+
+.bodyCard {
+  text-align: center;
+}
+
+.bodyCard li {
+  list-style-type: none;
+}
+
+.description {
+  width: 95%;
+  padding: 20px;
+  text-align: justify;
+}
