@@ -1,29 +1,40 @@
 'use strict'
 
 import React, { Component } from "react";
-import Search from "./components/search";
-import BodyCard from "./components/body-card";
-import Description from "./components/description";
-import Slider from "./components/slider";
+import AppContent from "./components/app-content";
 
 export default class App extends Component {
+    constructor () {
+        super();
+        this.state = {
+            game: {
+                'url': 'https://www.mmobomb.com/open/call-of-duty-warzone',
+                'title': "Call Of Duty: Warzone",
+                'thumbnail': "https://www.mmobomb.com/g/452/thumbnail.jpg",
+                'genre': "Shooter",
+                'platform': "Windows",
+                'developer': "Infinity Ward"
+            },
+            screenshots: [
+                {
+                    "id": 1124,
+                    "image": "https://www.mmobomb.com/g/452/Call-of-Duty-Warzone-1.jpg"
+                  },
+                  {
+                    "id": 1125,
+                    "image": "https://www.mmobomb.com/g/452/Call-of-Duty-Warzone-2.jpg"
+                  }
+            ],
+            description : "One of the most popular FPSes in the world is now a free-to-play battle royale: Call of Duty: Warzone. Strive to become the last squad standing in Battle Royale mode, where 150 players loot and shoot their way through an ever-shrinking battlefield; or complete contracts and try to escape with the most cash in Plunder mode."
+        }
+    }
     render(){
         return(
-            <div className="container">
-
-            <Search />
-            <div className="card">
-                <BodyCard />
-
-                <div className="footerPag">
-                   <Description  descricao={'Diablo Immortal is an all-new massively multiplayer online action RPG and Blizzard’s long advertised mobile Diablo experience (that totally was not coming to PC) comes to PC complete with all the demon slaying and looting you could want.'}/>
-
-                    <Slider screenshots={[{
-                        image : 'https://www.mmobomb.com/g/452/Call-of-Duty-Warzone-1.jpg'
-                    }, {image : "https://www.mmobomb.com/g/452/Call-of-Duty-Warzone-2.jpg"}]}/>
-               </div>
-            </div>
-        </div>
-        )
+            <AppContent 
+                game = {this.state.game}
+                description = {this.state.description}
+                screenshots = {this.state.screenshots}
+            />
+        );
     }
 }
