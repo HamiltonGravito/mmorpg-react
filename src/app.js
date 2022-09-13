@@ -4,36 +4,60 @@ import React, { Component } from "react";
 import AppContent from "./components/app-content";
 
 export default class App extends Component {
-    constructor () {
+    constructor() {
         super();
         this.state = {
-            game: {
-                'url': 'https://www.mmobomb.com/open/call-of-duty-warzone',
-                'title': "Call Of Duty: Warzone",
-                'thumbnail': "https://www.mmobomb.com/g/452/thumbnail.jpg",
-                'genre': "Shooter",
-                'platform': "Windows",
-                'developer': "Infinity Ward"
-            },
-            screenshots: [
-                {
-                    "id": 1124,
-                    "image": "https://www.mmobomb.com/g/452/Call-of-Duty-Warzone-1.jpg"
-                  },
-                  {
-                    "id": 1125,
-                    "image": "https://www.mmobomb.com/g/452/Call-of-Duty-Warzone-2.jpg"
-                  }
-            ],
-            description : "One of the most popular FPSes in the world is now a free-to-play battle royale: Call of Duty: Warzone. Strive to become the last squad standing in Battle Royale mode, where 150 players loot and shoot their way through an ever-shrinking battlefield; or complete contracts and try to escape with the most cash in Plunder mode."
+            game: null,
+            screenshots: [],
+            description: ""
         }
     }
-    render(){
-        return(
-            <AppContent 
-                game = {this.state.game}
-                description = {this.state.description}
-                screenshots = {this.state.screenshots}
+
+    handleSearch(e) {
+
+        const options = {
+            method: 'GET',
+            mode: 'cors',
+            headers: {
+                'X-RapidAPI-Key': '2062f73105mshf3b49ac8093320dp106e6fjsnf58dc9fcf7e9',
+                'X-RapidAPI-Host': 'mmo-games.p.rapidapi.com'
+            }
+        };
+
+        const value = e.target.value;
+        const keyCode = e.key;
+
+        if (keyCode === "Enter") {
+            fetch(`https://mmo-games.p.rapidapi.com/game?id=${value}`, options)
+                .then(response => response.json())
+                .then(response => {
+                    this.setState({
+                        game: {
+                            'url': response.game_url,
+                            'title': response.title,
+                            'thumbnail': response.thumbnail,
+                            'genre': response.genre,
+                            'platform': response.platform,
+                            'developer': response.developer
+                        },
+                        screenshots: [
+                            response.screenshots
+                        ],
+                        description: response.short_description
+                    })
+                    console.log(response)
+                })
+                .catch(err => console.error(err));
+        }
+    }
+
+    render() {
+        return (
+            <AppContent
+                game={this.state.game}
+                description={this.state.description}
+                screenshots={this.state.screenshots}
+                handleSearch={(e) => this.handleSearch(e)}
             />
         );
     }

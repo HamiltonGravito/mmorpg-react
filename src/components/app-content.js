@@ -8,10 +8,10 @@ import Slider from "../components/slider";
 
 import PropTypes from 'prop-types';
 
-const AppContent = ({ game, description, screenshots }) => {
+const AppContent = ({ game, description, screenshots, handleSearch }) => {
   return (
     <div className="container">
-      <Search />
+      <Search handleSearch={ handleSearch }/>
 
       <div className="card">
       {!!game && <BodyCard game={game} />}
@@ -27,9 +27,9 @@ const AppContent = ({ game, description, screenshots }) => {
 }
 
 AppContent.propTypes = {
-  game : PropTypes.object.isRequired,
-  description : PropTypes.string.isRequired,
-  screenshots: PropTypes.array.isRequired
+  game : PropTypes.object,
+  description : PropTypes.string,
+  screenshots: PropTypes.array
 }
 
 export default AppContent;
